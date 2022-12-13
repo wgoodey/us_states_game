@@ -1,4 +1,3 @@
-import turtle
 from turtle import Screen, Turtle
 import pandas
 
@@ -42,13 +41,9 @@ if len(correct_guesses) == 50:
     writer.write(f"You got all 50 states!", align="center", font=("Arial", 20, "normal"))
 else:
     writer.write(f"You got {len(correct_guesses)} states!", align="center", font=("Arial", 20, "normal"))
-# TODO: export csv of states that were missed.
-all_states = list(data.state)
-missed_states = []
-for state in all_states:
-    if state not in correct_guesses:
-        missed_states.append(state)
 
+# export csv of states that were missed.
+missed_states = [state for state in list(data.state) if state not in correct_guesses]
 missed_states = pandas.DataFrame(missed_states)
 missed_states.to_csv("states_to_learn.csv")
 
